@@ -12,6 +12,6 @@ docker image build -t supereight-testing ./supereight-testing/
 
 ## Running a temporary container using an image
 ```
-docker run -it --rm setest supereight-testing
+docker run -it --rm supereight-testing
 ```
 
