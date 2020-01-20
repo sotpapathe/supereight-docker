@@ -13,7 +13,8 @@ RUN git clone https://github.com/strasdat/Sophus.git \
 		&& cd "Sophus/build" \
 		&& git checkout v1.0.0 \
 		&& cmake -DCMAKE_BUILD_TYPE=Release .. \
-		&& make install
+		&& make install \
+		&& rm -rf /usr/local/src/Sophus
 
 # Install googletest
 WORKDIR /usr/local/src/
