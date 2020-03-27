@@ -20,6 +20,9 @@ RUN git clone https://github.com/strasdat/Sophus.git
 RUN mkdir -p /usr/local/src/Sophus/build
 WORKDIR /usr/local/src/Sophus/build
 RUN git checkout v1.0.0
+RUN sed -i \
+		's/option(BUILD_TESTS "Build tests." ON)/option(BUILD_TESTS "Build tests." OFF)/' \
+		/usr/local/src/Sophus/CMakeLists.txt
 RUN cmake -DCMAKE_BUILD_TYPE=Release ..
 RUN make install
 RUN rm -rf /usr/local/src/Sophus
