@@ -25,7 +25,7 @@ RUN git checkout v1.0.0 \
 		's/option(BUILD_TESTS "Build tests." ON)/option(BUILD_TESTS "Build tests." OFF)/' \
 		/usr/local/src/Sophus/CMakeLists.txt \
 	&& cmake -DCMAKE_BUILD_TYPE=Release .. \
-	&& make install \
+	&& make -j install \
 	&& rm -rf /usr/local/src/Sophus
 
 # googletest
@@ -33,7 +33,7 @@ WORKDIR /usr/local/src/
 RUN git clone --depth=1 https://github.com/google/googletest.git
 WORKDIR /usr/local/src/googletest/googletest
 RUN cmake -DCMAKE_BUILD_TYPE=Release . \
-	&& make
+	&& make -j
 
 
 
