@@ -5,17 +5,17 @@ Docker images for [supereight](https://github.com/emanuelev/supereight).
 
 ### Building an image
 ```
-docker image build --tag supereight-testing ./supereight-testing/
+docker image build --file Dockerfile-CI --tag supereight-ci:18.04 .
 ```
 
 ### Running a temporary container using an image
 ```
-docker run --tty --interactive --rm supereight-testing
+docker run --tty --interactive --rm supereight-ci
 ```
 
 ### Pushing the built image to DockerHub
 ```
-docker push sotirisp/supereight-testing:latest
+docker push sotirisp/supereight-ci:18.04
 ```
 
 
