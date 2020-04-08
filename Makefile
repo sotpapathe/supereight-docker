@@ -13,5 +13,5 @@ push-ci:
 	docker push sotirisp/supereight-ci:16.04
 
 run-ci:
-	docker run --tty --interactive --rm supereight-ci:latest
+	docker run --tty --interactive --rm sotirisp/supereight-ci:latest
 
