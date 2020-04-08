@@ -2,13 +2,14 @@ FROM ubuntu:18.04
 
 # Install required packages ###################################################
 ENV DEBIAN_FRONTEND=noninteractive
-RUN apt-get update
-RUN apt-get -y install \
+RUN apt-get update \
+	&& apt-get -y install \
 		build-essential \
 		git \
 		cmake \
 		libeigen3-dev \
-		libopencv-dev
+		libopencv-dev \
+	&& rm -rf /var/lib/apt/lists/*
 
 
 
