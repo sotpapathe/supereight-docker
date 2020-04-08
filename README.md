@@ -3,30 +3,30 @@ Docker images for [supereight](https://github.com/emanuelev/supereight).
 
 
 
-### Building an image
-```
-docker image build --file Dockerfile-CI --tag supereight-ci:18.04 .
-```
+## supereight-ci
+Docker image for running CI pipelines for
+[supereight](https://github.com/emanuelev/supereight). It contains all
+required dependencies to compile supereight without a GUI and its unit tests.
 
-### Running a temporary container using an image
-```
-docker run --tty --interactive --rm supereight-ci
-```
-
-### Pushing the built image to DockerHub
-```
-docker push sotirisp/supereight-ci:18.04
-```
-
-
-
-## supereight-testing
-Docker image for running the
-[supereight](https://github.com/emanuelev/supereight) tests. It contains all
-required dependencies to compile supereight without a GUI and its tests.
-
-To run the tests the following environment variable must be set:
+In order for CMake to find googletest and successfully compile the tests, the
+following environment variable must be set:
 ```
 GTEST_ROOT=/usr/local/src/googletest/googletest/
 ```
+
+### Building the image
+``` bash
+make
+```
+
+### Pushing the built image to DockerHub
+``` bash
+make push-ci
+```
+
+### Running a temporary container using the image
+``` bash
+make run-ci
+```
+
 
