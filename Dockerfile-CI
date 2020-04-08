@@ -28,8 +28,7 @@ RUN git clone https://github.com/strasdat/Sophus.git /usr/local/src/Sophus \
 		/usr/local/src/Sophus/CMakeLists.txt \
 	&& cmake -DCMAKE_BUILD_TYPE=Release .. \
 	&& make -j install \
-	&& rm -rf /usr/local/src/Sophus \
-	&& rm -rf /usr/local/src/Sophus/.git
+	&& rm -rf /usr/local/src/Sophus
 
 # googletest
 RUN git clone https://github.com/google/googletest.git /usr/local/src/googletest \
