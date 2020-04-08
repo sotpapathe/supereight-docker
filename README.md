@@ -1,3 +1,6 @@
+<!-- SPDX-FileCopyrightText: 20192020 Sotiris Papatheodorou -->
+<!-- SPDX-License-Identifier: CC0-1.0 -->
+
 # supereight-docker
 Docker images for [supereight](https://github.com/emanuelev/supereight).
 

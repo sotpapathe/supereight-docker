@@ -1,3 +1,6 @@
+# SPDX-FileCopyrightText: 2019-2020 Sotiris Papatheodorou
+# SPDX-License-Identifier: CC0-1.0
+
 all: build-ci
 
 build-ci:
