@@ -14,6 +14,7 @@ RUN apt-get update \
 		libeigen3-dev \
 		libopencv-dev \
 		liboctomap-dev \
+		openssh-client \
 	&& rm -rf /var/lib/apt/lists/*
 
 

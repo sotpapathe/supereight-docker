@@ -22,19 +22,38 @@ GTEST_ROOT=/usr/local/src/googletest/googletest/
 ### Building the image
 
 ``` bash
-make
+./build.sh build-ci
 ```
 
 ### Pushing the built image to DockerHub
 
 ``` bash
-make push-ci
+./build.sh push-ci
 ```
 
 ### Running a temporary container using the image
 
 ``` bash
-make run-ci
+./build.sh run-ci
 ```
 
+
+
+## supereight-test
+
+Docker image for testing the private SRL version of supereight supereight. It
+contains all required dependencies to compile supereight without a GUI and its
+unit tests.
+
+### Building the image
+
+``` bash
+./build.sh build-test
+```
+
+### Running a temporary container using the image
+
+``` bash
+./build.sh run-test
+```
 

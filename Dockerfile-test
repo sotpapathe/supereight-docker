@@ -1,0 +1,31 @@
+# SPDX-FileCopyrightText: 2019-2020 Sotiris Papatheodorou
+# SPDX-License-Identifier: CC0-1.0
+#
+ARG BASE_IMAGE=sotirisp/supereight-ci:20.04
+
+# Create a temporary image to clone the repository so that the SSH
+# keys won't be contained in the final image
+FROM "$BASE_IMAGE" as intermediate
+LABEL stage=intermediate
+
+# Add the private SSH key
+# Add the repository domain to the SSH known hosts
+# Clone the repository
+ARG SSH_PRIVATE_KEY
+RUN mkdir -p /root/.ssh/ /usr/local/src/supereight-srl \
+	&& echo "$SSH_PRIVATE_KEY" > /root/.ssh/id_rsa \
+	&& chmod -R 600 /root/.ssh/ \
+	&& ssh-keyscan -t rsa bitbucket.org >> /root/.ssh/known_hosts \
+	&& git clone --recursive git@bitbucket.org:smartroboticslab/supereight-srl.git /usr/local/src/supereight-srl
+
+
+
+# Create the final image
+FROM "$BASE_IMAGE"
+
+# Copy across the files from our `intermediate` container
+RUN mkdir -p /usr/local/src/supereight-srl
+COPY --from=intermediate /usr/local/src/supereight-srl /usr/local/src/supereight-srl
+# Change into the repository directory
+WORKDIR /usr/local/src/supereight-srl
+
