@@ -14,15 +14,8 @@ by running `docker` (also possibly as root).
 ## supereight-ci
 
 Docker image for running CI pipelines for
-[supereight](https://github.com/emanuelev/supereight). It contains all required
-dependencies to compile supereight without a GUI and its unit tests.
-
-In order for CMake to find googletest and successfully compile the tests, the
-following environment variable has been already set in the image:
-
-``` bash
-GTEST_ROOT=/usr/local/src/googletest/googletest/
-```
+[supereight](https://github.com/emanuelev/supereight). It contains all the
+dependencies required to compile supereight (without a GUI) and its unit tests.
 
 #### Building the image
 
