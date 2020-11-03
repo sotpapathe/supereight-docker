@@ -28,10 +28,6 @@ case "$1" in
 				--tag sotirisp/supereight-ci:18.04 .
 		echo '# Ubuntu 18.04 image built #####################################'
 		docker image build --file Dockerfile-CI \
-				--build-arg BASE_IMAGE=ubuntu:16.04 \
-				--tag sotirisp/supereight-ci:16.04 .
-		echo '# Ubuntu 16.04 image built #####################################'
-		docker image build --file Dockerfile-CI \
 				--build-arg BASE_IMAGE=ros:melodic-ros-base-bionic \
 				--tag sotirisp/supereight-ci:ros-melodic .
 		echo '# ROS Melodic image built ######################################'
@@ -56,11 +52,6 @@ case "$1" in
 		echo '# Ubuntu 18.04 test image built ################################'
 		docker image build --file Dockerfile-test \
 				--build-arg SSH_PRIVATE_KEY="$SSH_PRIVATE_KEY" \
-				--build-arg BASE_IMAGE=sotirisp/supereight-ci:16.04 \
-				--tag sotirisp/supereight-ci:16.04-test .
-		echo '# Ubuntu 16.04 test image built ################################'
-		docker image build --file Dockerfile-test \
-				--build-arg SSH_PRIVATE_KEY="$SSH_PRIVATE_KEY" \
 				--build-arg BASE_IMAGE=sotirisp/supereight-ci:ros-melodic \
 				--tag sotirisp/supereight-ci:16.04-test .
 		echo '# ROS Melodic test image built #################################'
@@ -75,7 +66,6 @@ case "$1" in
 		docker push sotirisp/supereight-ci:latest
 		docker push sotirisp/supereight-ci:20.04
 		docker push sotirisp/supereight-ci:18.04
-		docker push sotirisp/supereight-ci:16.04
 		docker push sotirisp/supereight-ci:ros-melodic
 		;;
 
