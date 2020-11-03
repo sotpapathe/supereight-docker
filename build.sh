@@ -53,7 +53,7 @@ case "$1" in
 		docker image build --file Dockerfile-test \
 				--build-arg SSH_PRIVATE_KEY="$SSH_PRIVATE_KEY" \
 				--build-arg BASE_IMAGE=sotirisp/supereight-ci:ros-melodic \
-				--tag sotirisp/supereight-ci:16.04-test .
+				--tag sotirisp/supereight-ci:18.04-test .
 		echo '# ROS Melodic test image built #################################'
 		docker rmi -f $(docker images -q --filter label=stage=intermediate)
 		;;
