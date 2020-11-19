@@ -34,7 +34,7 @@ git checkout master
 
 # Force push the branches
 if [ "$#" -eq 1 ] && [ "$1" = 'push' ]; then
-	git push --force origin master:master
+	git push origin master:master
 	git push --force origin ubuntu2004:ubuntu2004
 	git push --force origin ros-noetic:ros-noetic
 	git push --force origin ubuntu1804:ubuntu1804
