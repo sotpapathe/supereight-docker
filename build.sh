@@ -10,6 +10,7 @@ usage() {
 	echo "Usage: $name ci"
 	echo "       $name test"
 	echo "       $name push-ci"
+	echo "       $name clean"
 	echo "       $name run-ci [TAG]"
 	echo "       $name run-test [TAG]"
 }
@@ -22,7 +23,7 @@ fi
 command="$1"
 tag='latest'
 case "$command" in
-	'ci'|'test'|'push-ci')
+	'ci'|'test'|'push-ci'|'clean')
 		# These commands accept a single argument
 		if [ "$#" -ne 1 ]; then
 			usage
@@ -66,7 +67,7 @@ case "$command" in
 		;;
 
 	'test')
-		SSH_PRIVATE_KEY=$(cat /home/$(logname)/.ssh/git_readonly_key)
+		SSH_PRIVATE_KEY=$(cat /home/"$(logname)"/.ssh/git_readonly_key)
 		docker image build --file Dockerfile-test \
 				--build-arg SSH_PRIVATE_KEY="$SSH_PRIVATE_KEY" \
 				--build-arg BASE_IMAGE=sotirisp/supereight-ci:20.04 \
@@ -88,7 +89,7 @@ case "$command" in
 				--build-arg BASE_IMAGE=sotirisp/supereight-ci:ros-melodic \
 				--tag sotirisp/supereight-ci:ros-melodic-test .
 		echo '# ROS Melodic test image built #################################'
-		docker rmi -f $(docker images -q --filter label=stage=intermediate)
+		docker rmi -f "$(docker images -q --filter label=stage=intermediate)"
 		;;
 
 	'push-ci')
@@ -97,6 +98,12 @@ case "$command" in
 		docker push sotirisp/supereight-ci:ros-noetic
 		docker push sotirisp/supereight-ci:18.04
 		docker push sotirisp/supereight-ci:ros-melodic
+		;;
+
+	'clean')
+		docker rmi -f "$(docker images -q --filter label=stage=intermediate)"
+		docker container prune
+		docker image prune
 		;;
 
 	'run-ci')
