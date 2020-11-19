@@ -8,11 +8,13 @@ FROM "$BASE_IMAGE" as supereight-ci
 ENV DEBIAN_FRONTEND=noninteractive
 RUN apt-get update \
 	&& apt-get -y install \
-		build-essential \
-		git \
+		g++ \
+		make \
 		cmake \
+		git \
 		libeigen3-dev \
 		libopencv-dev \
+		libyaml-cpp-dev \
 		liboctomap-dev \
 		openssh-client \
 	&& rm -rf /var/lib/apt/lists/*
