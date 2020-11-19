@@ -52,6 +52,10 @@ case "$command" in
 				--tag sotirisp/supereight-ci:latest .
 		echo '# Ubuntu 20.04 image built #####################################'
 		docker image build --file Dockerfile-CI \
+				--build-arg BASE_IMAGE=ros:noetic-ros-base-focal \
+				--tag sotirisp/supereight-ci:ros-noetic .
+		echo '# ROS Noetic image built #######################################'
+		docker image build --file Dockerfile-CI \
 				--build-arg BASE_IMAGE=ubuntu:18.04 \
 				--tag sotirisp/supereight-ci:18.04 .
 		echo '# Ubuntu 18.04 image built #####################################'
@@ -71,13 +75,18 @@ case "$command" in
 		echo '# Ubuntu 20.04 test image built ################################'
 		docker image build --file Dockerfile-test \
 				--build-arg SSH_PRIVATE_KEY="$SSH_PRIVATE_KEY" \
+				--build-arg BASE_IMAGE=sotirisp/supereight-ci:ros-noetic \
+				--tag sotirisp/supereight-ci:ros-noetic-test .
+		echo '# ROS Noetic test image built ##################################'
+		docker image build --file Dockerfile-test \
+				--build-arg SSH_PRIVATE_KEY="$SSH_PRIVATE_KEY" \
 				--build-arg BASE_IMAGE=sotirisp/supereight-ci:18.04 \
 				--tag sotirisp/supereight-ci:18.04-test .
 		echo '# Ubuntu 18.04 test image built ################################'
 		docker image build --file Dockerfile-test \
 				--build-arg SSH_PRIVATE_KEY="$SSH_PRIVATE_KEY" \
 				--build-arg BASE_IMAGE=sotirisp/supereight-ci:ros-melodic \
-				--tag sotirisp/supereight-ci:18.04-test .
+				--tag sotirisp/supereight-ci:ros-melodic-test .
 		echo '# ROS Melodic test image built #################################'
 		docker rmi -f $(docker images -q --filter label=stage=intermediate)
 		;;
@@ -85,6 +94,7 @@ case "$command" in
 	'push-ci')
 		docker push sotirisp/supereight-ci:latest
 		docker push sotirisp/supereight-ci:20.04
+		docker push sotirisp/supereight-ci:ros-noetic
 		docker push sotirisp/supereight-ci:18.04
 		docker push sotirisp/supereight-ci:ros-melodic
 		;;
