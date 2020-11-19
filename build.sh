@@ -3,21 +3,49 @@
 # SPDX-License-Identifier: CC0-1.0
 
 set -eu
-IFS="$(printf '%b_' '\t\n')" ; IFS="${IFS%_}"
+IFS="$(printf '%b_' '\t\n')"; IFS="${IFS%_}"
 
 usage() {
-	echo "Usage: $(basename "$0") build-ci|build-test|run-ci|run-test|push-ci"
+	name='build.sh'
+	echo "Usage: $name ci"
+	echo "       $name test"
+	echo "       $name push-ci"
+	echo "       $name run-ci [TAG]"
+	echo "       $name run-test [TAG]"
 }
 
-# Ensure only one argument was supplied
-if [ "$#" -ne 1 ] ; then
+# Parse the command line arguments
+if [ "$#" -lt 1 ] || [ "$#" -gt 2 ]; then
 	usage
 	exit 1
 fi
+command="$1"
+tag='latest'
+case "$command" in
+	'ci'|'test'|'push-ci')
+		# These commands accept a single argument
+		if [ "$#" -ne 1 ]; then
+			usage
+			exit 1
+		fi
+		;;
 
-# Perform the appropriate action
-case "$1" in
-	'build-ci')
+	'run-ci'|'run-test')
+		# Get the command argument if provided
+		if [ "$#" -eq 2 ]; then
+			tag="$2"
+		fi
+		;;
+	*)
+		# Unknown command
+		usage
+		exit 1
+		;;
+esac
+
+# Run the appropriate command
+case "$command" in
+	'ci')
 		docker image build --file Dockerfile-CI \
 				--build-arg BASE_IMAGE=ubuntu:20.04 \
 				--tag sotirisp/supereight-ci:20.04 \
@@ -33,11 +61,7 @@ case "$1" in
 		echo '# ROS Melodic image built ######################################'
 		;;
 
-	'run-ci')
-		docker run --tty --interactive --rm sotirisp/supereight-ci:latest
-		;;
-
-	'build-test')
+	'test')
 		SSH_PRIVATE_KEY=$(cat /home/$(logname)/.ssh/git_readonly_key)
 		docker image build --file Dockerfile-test \
 				--build-arg SSH_PRIVATE_KEY="$SSH_PRIVATE_KEY" \
@@ -58,10 +82,6 @@ case "$1" in
 		docker rmi -f $(docker images -q --filter label=stage=intermediate)
 		;;
 
-	'run-test')
-		docker run --tty --interactive --rm sotirisp/supereight-ci:latest-test
-		;;
-
 	'push-ci')
 		docker push sotirisp/supereight-ci:latest
 		docker push sotirisp/supereight-ci:20.04
@@ -69,9 +89,12 @@ case "$1" in
 		docker push sotirisp/supereight-ci:ros-melodic
 		;;
 
-	*)
-		usage
-		exit 1
+	'run-ci')
+		docker run --tty --interactive --rm sotirisp/supereight-ci:"$tag"
+		;;
+
+	'run-test')
+		docker run --tty --interactive --rm sotirisp/supereight-ci:"$tag"-test
 		;;
 esac
 
