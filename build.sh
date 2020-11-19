@@ -102,6 +102,9 @@ case "$command" in
 		;;
 
 	'clean')
+		printf '\033[1;31mCAUTION\033[m: This will affect all docker images/containers, not just the supereight ones\n'
+		echo "Press [Enter] to continue or [Ctrl+C] to cancel"
+		read -r _
 		docker rmi -f "$(docker images -q --filter label=stage=intermediate)"
 		docker container prune
 		docker image prune
