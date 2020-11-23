@@ -47,15 +47,19 @@ required dependencies to compile supereight without a GUI and its unit tests.
 Unlike supereight-ci, it also contains a clone of the supereight-srl
 repository. Generated from [Dockerfile](./Dockerfile-test).
 
+#### SSH key setup
+
+Before building the image you'll need to create a passwordless SSH key and
+authorize it to read the private supereight repository. The key must be placed
+in the file `~/.ssh/git_readonly_key`.
+
 #### Building the image
+
+After setting up the SSH key run
 
 ``` sh
 ./build.sh test
 ```
-
-Building the test images requires a passwordless SSH private key that is
-authorized to read the private repository. The key must be located in
-`~/.ssh/git_readonly_key`.
 
 #### Running a temporary container using the image
 
@@ -71,6 +75,7 @@ Note that if you exit the container, any changes you've made will be discarded.
 ## Repository management
 
 #### Cleaning images
+
 To remove any leftover images and containers run
 
 ``` sh
