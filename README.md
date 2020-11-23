@@ -16,7 +16,8 @@ by running `docker` (also possibly as root).
 
 Docker image for running CI pipelines for supereight. It contains all the
 dependencies required to compile supereight (without a GUI) and its unit tests.
-Generated from [Dockerfile](./Dockerfile).
+Generated from [Dockerfile](./Dockerfile) and available on
+[DockerHub](https://hub.docker.com/repository/docker/sotirisp/supereight-ci).
 
 #### Building the image
 
