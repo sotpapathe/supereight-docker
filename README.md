@@ -17,6 +17,7 @@ by running `docker` (also possibly as root).
 Docker image for running CI pipelines for
 [supereight](https://github.com/emanuelev/supereight). It contains all the
 dependencies required to compile supereight (without a GUI) and its unit tests.
+Generated from [Dockerfile](./Dockerfile).
 
 #### Building the image
 
@@ -44,7 +45,7 @@ dependencies required to compile supereight (without a GUI) and its unit tests.
 Docker image for testing the private SRL version of supereight. It contains all
 required dependencies to compile supereight without a GUI and its unit tests.
 Unlike supereight-ci, it also contains a clone of the supereight-srl
-repository.
+repository. Generated from [Dockerfile](./Dockerfile-test).
 
 #### Building the image
 

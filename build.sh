@@ -48,20 +48,20 @@ esac
 # Run the appropriate command
 case "$command" in
 	'ci')
-		docker image build --file Dockerfile-CI \
+		docker image build --file Dockerfile \
 				--build-arg BASE_IMAGE=ubuntu:20.04 \
 				--tag sotirisp/supereight-ci:20.04 \
 				--tag sotirisp/supereight-ci:latest .
 		echo '# Ubuntu 20.04 image built #####################################'
-		docker image build --file Dockerfile-CI \
+		docker image build --file Dockerfile \
 				--build-arg BASE_IMAGE=ros:noetic-ros-base-focal \
 				--tag sotirisp/supereight-ci:ros-noetic .
 		echo '# ROS Noetic image built #######################################'
-		docker image build --file Dockerfile-CI \
+		docker image build --file Dockerfile \
 				--build-arg BASE_IMAGE=ubuntu:18.04 \
 				--tag sotirisp/supereight-ci:18.04 .
 		echo '# Ubuntu 18.04 image built #####################################'
-		docker image build --file Dockerfile-CI \
+		docker image build --file Dockerfile \
 				--build-arg BASE_IMAGE=ros:melodic-ros-base-bionic \
 				--tag sotirisp/supereight-ci:ros-melodic .
 		echo '# ROS Melodic image built ######################################'

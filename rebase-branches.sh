@@ -12,22 +12,22 @@ git branch --force ubuntu2004 master
 # ROS Noetic
 git branch --force ros-noetic master
 git checkout ros-noetic
-sed --in-place 's/ARG BASE_IMAGE=ubuntu:20\.04/ARG BASE_IMAGE=ros:noetic-ros-base-focal/' Dockerfile-CI
-git add Dockerfile-CI
+sed --in-place 's/ARG BASE_IMAGE=ubuntu:20\.04/ARG BASE_IMAGE=ros:noetic-ros-base-focal/' Dockerfile
+git add Dockerfile
 git commit --message 'Change default image to ROS Noetic on Ubuntu 20.04'
 
 # Ubuntu 18.04
 git branch --force ubuntu1804 master
 git checkout ubuntu1804
-sed --in-place 's/ARG BASE_IMAGE=ubuntu:20\.04/ARG BASE_IMAGE=ubuntu:18\.04/' Dockerfile-CI
-git add Dockerfile-CI
+sed --in-place 's/ARG BASE_IMAGE=ubuntu:20\.04/ARG BASE_IMAGE=ubuntu:18\.04/' Dockerfile
+git add Dockerfile
 git commit --message 'Change default image to Ubuntu 18.04'
 
 # ROS Melodic
 git branch --force ros-melodic master
 git checkout ros-melodic
-sed --in-place 's/ARG BASE_IMAGE=ubuntu:20\.04/ARG BASE_IMAGE=ros:melodic-ros-base-bionic/' Dockerfile-CI
-git add Dockerfile-CI
+sed --in-place 's/ARG BASE_IMAGE=ubuntu:20\.04/ARG BASE_IMAGE=ros:melodic-ros-base-bionic/' Dockerfile
+git add Dockerfile
 git commit --message 'Change default image to ROS Melodic on Ubuntu 18.04'
 
 git checkout master
