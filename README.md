@@ -14,8 +14,7 @@ by running `docker` (also possibly as root).
 
 ## supereight-ci
 
-Docker image for running CI pipelines for
-[supereight](https://github.com/emanuelev/supereight). It contains all the
+Docker image for running CI pipelines for supereight. It contains all the
 dependencies required to compile supereight (without a GUI) and its unit tests.
 Generated from [Dockerfile](./Dockerfile).
 
