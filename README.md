@@ -19,6 +19,13 @@ dependencies required to compile supereight (without a GUI) and its unit tests.
 Generated from [Dockerfile](./Dockerfile) and available on
 [DockerHub](https://hub.docker.com/repository/docker/sotirisp/supereight-ci).
 
+In order for CMake to find googletest and successfully compile the tests, the
+following environment variable has been already set in the image:
+
+``` sh
+GTEST_ROOT=/usr/local/src/googletest/googletest/
+``` 
+
 #### Building the image
 
 ``` sh

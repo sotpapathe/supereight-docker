@@ -19,6 +19,15 @@ RUN apt-get update \
 		openssh-client \
 	&& rm -rf /var/lib/apt/lists/*
 
+# Install googletest from source
+RUN git clone https://github.com/google/googletest.git /usr/local/src/googletest \
+	&& cd /usr/local/src/googletest/googletest \
+	&& git checkout release-1.8.1 \
+	&& cmake -DCMAKE_BUILD_TYPE=Release . \
+	&& make -j \
+	&& rm -rf /usr/local/src/googletest/.git
+ENV GTEST_ROOT=/usr/local/src/googletest/googletest/
+ 
 # Set the directory the shell is in after starting the container
 WORKDIR /usr/local/src/
 
