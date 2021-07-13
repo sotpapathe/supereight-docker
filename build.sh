@@ -90,7 +90,8 @@ case "$command" in
 				--build-arg BASE_IMAGE=sotirisp/supereight-ci:ros-melodic \
 				--tag sotirisp/supereight-ci:ros-melodic-test .
 		echo '# ROS Melodic test image built #################################'
-		docker rmi -f "$(docker images -q --filter label=stage=intermediate)"
+		# shellcheck disable=SC2046
+		docker rmi -f $(docker images -q --filter label=stage=intermediate)
 		;;
 
 	'push-ci')
