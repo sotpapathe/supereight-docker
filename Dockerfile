@@ -13,6 +13,7 @@ RUN apt-get update \
 		cmake \
 		git \
 		libeigen3-dev \
+		libboost-dev \
 		libopencv-dev \
 		libyaml-cpp-dev \
 		liboctomap-dev \
