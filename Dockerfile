@@ -9,6 +9,10 @@ ENV DEBIAN_FRONTEND=noninteractive
 RUN apt-get update \
 	&& apt-get -y install \
 		g++ \
+		clang \
+		clang-tools \
+		clang-format \
+		valgrind \
 		make \
 		cmake \
 		git \
