@@ -21,6 +21,8 @@ RUN apt-get update \
 		libyaml-cpp-dev \
 		make \
 		openssh-client \
+		python3 \
+		python3-pip \
 		time \
 		valgrind \
 	&& rm -rf /var/lib/apt/lists/*
@@ -33,6 +35,9 @@ RUN git clone https://github.com/google/googletest.git /usr/local/src/googletest
 	&& make -j \
 	&& rm -rf /usr/local/src/googletest/.git
 ENV GTEST_ROOT=/usr/local/src/googletest/googletest/
+
+# Install the FSFE reuse tool
+RUN pip3 install reuse==0.13.0
  
 # Set the directory the shell is in after starting the container
 WORKDIR /usr/local/src/
