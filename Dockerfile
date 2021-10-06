@@ -8,21 +8,21 @@ FROM "$BASE_IMAGE" as supereight-ci
 ENV DEBIAN_FRONTEND=noninteractive
 RUN apt-get update \
 	&& apt-get -y install \
-		time \
-		g++ \
 		clang \
-		clang-tools \
 		clang-format \
-		valgrind \
-		make \
+		clang-tools \
 		cmake \
+		g++ \
 		git \
-		libeigen3-dev \
 		libboost-dev \
+		libeigen3-dev \
+		liboctomap-dev \
 		libopencv-dev \
 		libyaml-cpp-dev \
-		liboctomap-dev \
+		make \
 		openssh-client \
+		time \
+		valgrind \
 	&& rm -rf /var/lib/apt/lists/*
 
 # Install googletest from source
