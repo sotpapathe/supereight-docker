@@ -12,6 +12,7 @@ RUN apt-get update \
 		clang-format-10 \
 		clang-tools \
 		cmake \
+		doxygen \
 		g++ \
 		git \
 		libboost-dev \
