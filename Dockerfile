@@ -19,6 +19,7 @@ RUN apt-get update \
 		libeigen3-dev \
 		liboctomap-dev \
 		libopencv-dev \
+		libpcl-dev \
 		libyaml-cpp-dev \
 		make \
 		openssh-client \
