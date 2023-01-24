@@ -1,7 +1,8 @@
+# SPDX-FileCopyrightText: 2019-2023 Smart Robotics Lab, Imperial College London, Technical University of Munich
 # SPDX-FileCopyrightText: 2019-2023 Sotiris Papatheodorou
 # SPDX-License-Identifier: CC0-1.0
 
-ARG BASE_IMAGE=ubuntu:20.04
+ARG BASE_IMAGE=ubuntu:22.04
 FROM "$BASE_IMAGE" as supereight-ci
 
 # Install the required packages

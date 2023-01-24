@@ -1,6 +1,6 @@
 #!/usr/bin/sh
-# SPDX-FileCopyrightText: 2019-2020 Smart Robotics Lab, Imperial College London
-# SPDX-FileCopyrightText: 2019-2020 Sotiris Papatheodorou
+# SPDX-FileCopyrightText: 2019-2023 Smart Robotics Lab, Imperial College London, Technical University of Munich
+# SPDX-FileCopyrightText: 2019-2023 Sotiris Papatheodorou
 # SPDX-License-Identifier: CC0-1.0
 
 set -eu
@@ -49,9 +49,13 @@ esac
 case "$command" in
 	'ci')
 		docker image build --file Dockerfile \
-				--build-arg BASE_IMAGE=ubuntu:20.04 \
-				--tag sotirisp/supereight-ci:20.04 \
+				--build-arg BASE_IMAGE=ubuntu:22.04 \
+				--tag sotirisp/supereight-ci:22.04 \
 				--tag sotirisp/supereight-ci:latest .
+		echo '# Ubuntu 22.04 image built #####################################'
+		docker image build --file Dockerfile \
+				--build-arg BASE_IMAGE=ubuntu:20.04 \
+				--tag sotirisp/supereight-ci:20.04 .
 		echo '# Ubuntu 20.04 image built #####################################'
 		docker image build --file Dockerfile \
 				--build-arg BASE_IMAGE=ros:noetic-ros-base-focal \
@@ -71,9 +75,14 @@ case "$command" in
 		SSH_PRIVATE_KEY=$(cat /home/"$(logname)"/.ssh/git_readonly_key)
 		docker image build --file Dockerfile-test \
 				--build-arg SSH_PRIVATE_KEY="$SSH_PRIVATE_KEY" \
-				--build-arg BASE_IMAGE=sotirisp/supereight-ci:20.04 \
-				--tag sotirisp/supereight-ci:20.04-test \
+				--build-arg BASE_IMAGE=sotirisp/supereight-ci:22.04 \
+				--tag sotirisp/supereight-ci:22.04-test \
 				--tag sotirisp/supereight-ci:latest-test .
+		echo '# Ubuntu 22.04 test image built ################################' 
+		docker image build --file Dockerfile-test \
+				--build-arg SSH_PRIVATE_KEY="$SSH_PRIVATE_KEY" \
+				--build-arg BASE_IMAGE=sotirisp/supereight-ci:20.04 \
+				--tag sotirisp/supereight-ci:20.04-test .
 		echo '# Ubuntu 20.04 test image built ################################'
 		docker image build --file Dockerfile-test \
 				--build-arg SSH_PRIVATE_KEY="$SSH_PRIVATE_KEY" \
@@ -96,6 +105,7 @@ case "$command" in
 
 	'push-ci')
 		docker push sotirisp/supereight-ci:latest
+		docker push sotirisp/supereight-ci:22.04
 		docker push sotirisp/supereight-ci:20.04
 		docker push sotirisp/supereight-ci:ros-noetic
 		docker push sotirisp/supereight-ci:18.04

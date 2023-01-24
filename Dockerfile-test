@@ -1,7 +1,8 @@
-# SPDX-FileCopyrightText: 2019-2020 Sotiris Papatheodorou
+# SPDX-FileCopyrightText: 2019-2023 Smart Robotics Lab, Imperial College London, Technical University of Munich
+# SPDX-FileCopyrightText: 2019-2023 Sotiris Papatheodorou
 # SPDX-License-Identifier: CC0-1.0
-#
-ARG BASE_IMAGE=sotirisp/supereight-ci:20.04
+
+ARG BASE_IMAGE=sotirisp/supereight-ci:22.04
 
 # Create a temporary image to clone the repository so that the SSH
 # keys won't be contained in the final image
