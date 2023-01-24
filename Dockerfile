@@ -18,7 +18,9 @@ RUN apt-get update \
 		git \
 		libboost-dev \
 		libeigen3-dev \
+		libgomp1 \
 		liboctomap-dev \
+		libomp-dev \
 		libopencv-dev \
 		libpcl-dev \
 		libtbb-dev \
