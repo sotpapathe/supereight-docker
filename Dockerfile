@@ -41,7 +41,7 @@ RUN git clone https://github.com/google/googletest.git /usr/local/src/googletest
 ENV GTEST_ROOT=/usr/local/src/googletest/googletest/
 
 # Install the FSFE reuse tool
-RUN pip3 install reuse==1.1.0
+RUN pip3 install reuse==1.0.0
  
 # Set the directory the shell is in after starting the container
 WORKDIR /usr/local/src/
