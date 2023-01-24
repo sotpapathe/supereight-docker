@@ -104,7 +104,7 @@ case "$command" in
 		;;
 
 	'push-ci')
-		echo 'Enter the docker hub password and press [Ctrl+D]'
+		echo 'Enter the docker hub password and press [Enter] and then [Ctrl+D]'
 		docker login --username sotirisp --password-stdin
 		docker push sotirisp/supereight-ci:latest
 		docker push sotirisp/supereight-ci:22.04
