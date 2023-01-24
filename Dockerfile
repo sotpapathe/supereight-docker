@@ -10,7 +10,7 @@ ENV DEBIAN_FRONTEND=noninteractive
 RUN apt-get update \
 	&& apt-get -y install \
 		clang \
-		clang-format-10 \
+		clang-format \
 		clang-tools \
 		cmake \
 		doxygen \
