@@ -1,10 +1,11 @@
-<!-- SPDX-FileCopyrightText: 20192020 Sotiris Papatheodorou -->
+<!-- SPDX-FileCopyrightText: 2019-2023 Sotiris Papatheodorou -->
 <!-- SPDX-License-Identifier: CC0-1.0 -->
 
 # supereight-docker
 
 Docker images for
-[supereight](https://bitbucket.org/smartroboticslab/supereight-public/src/master/).
+[supereight](https://bitbucket.org/smartroboticslab/supereight-public/src/master/)
+and [supereight 2](https://bitbucket.org/smartroboticslab/supereight2/).
 
 Depending on how your system is set up, you might have to run the following
 commands as root (using `sudo`). You will also have to start the docker daemon
@@ -26,23 +27,28 @@ following environment variable has been already set in the image:
 GTEST_ROOT=/usr/local/src/googletest/googletest/
 ``` 
 
-#### Building the image
+### Building the images
 
 ``` sh
-./build.sh ci
+# Build all images
+make
+# Build only the image based on Ubuntu 18.04
+make 18.04
 ```
 
-#### Pushing the built image to DockerHub
+### Pushing the built images to DockerHub
 
 ``` sh
-./build.sh push-ci
+make push
 ```
 
-#### Running a temporary container using the image
+### Running a temporary container using an image
 
 ``` sh
-./build.sh run-ci       # Uses the image tagged 'latest'
-./build.sh run-ci 18.04 # Uses the image tagged '18.04'
+# Run using the default image (the value of IMAGE in Makefile)
+make run
+# Run using the image tagged "sotirisp/supereight-ci:18.04"
+make IMAGE=18.04 run
 ```
 
 
@@ -54,39 +60,42 @@ required dependencies to compile supereight without a GUI and its unit tests.
 Unlike supereight-ci, it also contains a clone of the supereight-srl
 repository. Generated from [Dockerfile](./Dockerfile-test).
 
-#### SSH key setup
+### SSH key setup
 
 Before building the image you'll need to create a passwordless SSH key and
 authorize it to read the private supereight repository. The key must be placed
 in the file `~/.ssh/git_readonly_key`.
 
-#### Building the image
+### Building the image
 
 After setting up the SSH key run
 
 ``` sh
-./build.sh test
+# Build using the default image (the value of IMAGE in Makefile)
+make test
+# Build using the image tagged "sotirisp/supereight-ci:18.04"
+make IMAGE=18.04 run
 ```
 
-#### Running a temporary container using the image
+### Running a temporary container using the image
 
 ``` sh
-./build.sh run-test       # Uses the image tagged 'latest'
-./build.sh run-test 18.04 # Uses the image tagged '18.04'
+# Run using the default image (the value of IMAGE in Makefile)
+make run-test
+# Run using the image tagged "sotirisp/supereight-ci:18.04"
+make IMAGE=18.04 run-test
 ```
 
 Note that if you exit the container, any changes you've made will be discarded.
 
 
 
-## Repository management
-
-#### Cleaning images
+## Cleaning images
 
 To remove any leftover images and containers run
 
 ``` sh
-./build.sh clean
+make clean
 ```
 
 **CAUTION**: This will affect all docker images/containers, not just the
