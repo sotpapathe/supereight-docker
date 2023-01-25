@@ -91,16 +91,3 @@ To remove any leftover images and containers run
 
 **CAUTION**: This will affect all docker images/containers, not just the
 supereight ones.
- 
-#### Managing the DockerHub branches
-
-You should work directly on the master branch and whenever you make changes run
-
-``` sh
-./rebase-branches.sh      # Only update the local branches to check that everything looks good
-./rebase-branches.sh push # Update the local and remote branches
-```
-
-to create the other branches used to automatically build the images in
-DockerHub.
-
