@@ -62,6 +62,6 @@ run-test:
 .PHONY: clean
 clean:
 	@printf '\033[1;31mCAUTION\033[m: This will affect all docker images/containers, not just the supereight ones\n'
-	docker rmi -f $(shell docker images -q --filter label=stage=intermediate)
+	docker rmi -f $(shell docker images -q --filter label=stage=intermediate) 2>/dev/null || true
 	docker container prune
 	docker image prune
