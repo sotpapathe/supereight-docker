@@ -3,7 +3,7 @@
 # SPDX-License-Identifier: CC0-1.0
 
 IMAGE = 20.04
-SSH_PRIVATE_KEY = $(cat /home/"$(logname)"/.ssh/git_readonly_key)
+SSH_PRIVATE_KEY = ~/.ssh/supereight_readonly_key
 
 .PHONY: all
 all: 18.04 20.04 22.04 melodic noetic
@@ -50,10 +50,11 @@ run:
 
 .PHONY: test
 test:
+	cp $(SSH_PRIVATE_KEY) id_rsa
 	docker image build --file Dockerfile-test \
-		--build-arg SSH_PRIVATE_KEY=$(SSH_PRIVATE_KEY) \
 		--build-arg BASE_IMAGE=sotirisp/supereight-ci:$(IMAGE) \
 		--tag sotirisp/supereight-ci:$(IMAGE)-test  .
+	rm -f id_rsa
 
 .PHONY: run-test
 run-test:
