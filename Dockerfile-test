@@ -1,33 +1,28 @@
 # SPDX-FileCopyrightText: 2019-2023 Smart Robotics Lab, Imperial College London, Technical University of Munich
 # SPDX-FileCopyrightText: 2019-2023 Sotiris Papatheodorou
 # SPDX-License-Identifier: CC0-1.0
-
 ARG BASE_IMAGE=sotirisp/supereight-ci:22.04
 
 # Create a temporary image to clone the repository so that the SSH
 # keys won't be contained in the final image
 FROM "$BASE_IMAGE" as intermediate
 LABEL stage=intermediate
-
 # Add the private SSH key
+COPY id_rsa /root/.ssh/id_rsa
 # Add the repository domain to the SSH known hosts
 # Clone the supereight and srl_projection repositories
-COPY id_rsa /root/.ssh/id_rsa
 RUN mkdir -p /root/.ssh/ /usr/local/src/supereight-srl \
 	&& chmod -R 600 /root/.ssh/ \
 	&& ssh-keyscan -t rsa bitbucket.org >> /root/.ssh/known_hosts \
-	&& cat /root/.ssh/id_rsa \
 	&& git clone --recursive git@bitbucket.org:smartroboticslab/supereight-srl.git /usr/local/src/supereight-srl \
+	&& git clone --recursive git@bitbucket.org:smartroboticslab/supereight-2-srl.git /usr/local/src/supereight-2-srl \
 	&& git clone --recursive git@bitbucket.org:smartroboticslab/srl_projection.git /usr/local/src/srl_projection
 
 
 
 # Create the final image
 FROM "$BASE_IMAGE"
-
-# Copy across the files from our `intermediate` container
-RUN mkdir -p /usr/local/src/supereight-srl
 COPY --from=intermediate /usr/local/src/supereight-srl /usr/local/src/supereight-srl
+COPY --from=intermediate /usr/local/src/supereight-2-srl /usr/local/src/supereight-2-srl
 COPY --from=intermediate /usr/local/src/srl_projection /usr/local/src/srl_projection
-# Change into the repository directory
-WORKDIR /usr/local/src/supereight-srl
+WORKDIR /usr/local/src/supereight-2-srl
