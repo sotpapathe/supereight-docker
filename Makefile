@@ -30,7 +30,7 @@ noetic:
 
 .PHONY: push
 push:
-	echo 'Enter the docker hub password and press [Enter] and then [Ctrl+D]'
+	@echo 'Enter the docker hub password and press [Enter] and then [Ctrl+D]'
 	docker login --username sotirisp --password-stdin
 	docker push sotirisp/supereight-ci:18.04
 	docker push sotirisp/supereight-ci:20.04
