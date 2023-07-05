@@ -24,7 +24,7 @@ In order for CMake to find googletest and successfully compile the tests, the
 following environment variable has been already set in the image:
 
 ``` sh
-GTEST_ROOT=/usr/local/src/googletest/googletest/
+GTest_ROOT=/usr/local/src/googletest/googletest/
 ``` 
 
 ### Building the images

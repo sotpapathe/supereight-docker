@@ -32,7 +32,7 @@ RUN git clone https://github.com/google/googletest.git /usr/local/src/googletest
 	&& cmake -DCMAKE_BUILD_TYPE=Release . \
 	&& make -j \
 	&& rm -rf /usr/local/src/googletest/.git
-ENV GTEST_ROOT=/usr/local/src/googletest/googletest/
+ENV GTest_ROOT=/usr/local/src/googletest/googletest/
 
 # Install the supereight and supereight-testbot dependencies
 RUN apt-get update && apt-get -y install \
