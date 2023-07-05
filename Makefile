@@ -38,6 +38,13 @@ push:
 	docker push sotirisp/supereight-ci:ros-noetic
 	docker logout
 
+.PHONY: pull
+pull:
+	docker pull sotirisp/supereight-ci:18.04
+	docker pull sotirisp/supereight-ci:20.04
+	docker pull sotirisp/supereight-ci:22.04
+	docker pull sotirisp/supereight-ci:ros-noetic
+
 .PHONY: run
 run:
 	docker run --tty --interactive --rm sotirisp/supereight-ci:$(IMAGE)
