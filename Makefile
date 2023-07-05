@@ -6,7 +6,7 @@ IMAGE = 20.04
 SSH_PRIVATE_KEY = ~/.ssh/supereight_readonly_key
 
 .PHONY: all
-all: 18.04 20.04 22.04 melodic noetic
+all: 18.04 20.04 22.04 noetic
 
 .PHONY: 18.04
 18.04:
@@ -23,11 +23,6 @@ all: 18.04 20.04 22.04 melodic noetic
 	docker image build --build-arg BASE_IMAGE=ubuntu:$@ \
 		--tag sotirisp/supereight-ci:$@ .
 
-.PHONY: melodic
-melodic:
-	docker image build --build-arg BASE_IMAGE=ros:$@-ros-base \
-		--tag sotirisp/supereight-ci:ros-$@ .
-
 .PHONY: noetic
 noetic:
 	docker image build --build-arg BASE_IMAGE=ros:$@-ros-base \
@@ -40,7 +35,6 @@ push:
 	docker push sotirisp/supereight-ci:18.04
 	docker push sotirisp/supereight-ci:20.04
 	docker push sotirisp/supereight-ci:22.04
-	docker push sotirisp/supereight-ci:ros-melodic
 	docker push sotirisp/supereight-ci:ros-noetic
 	docker logout
 
